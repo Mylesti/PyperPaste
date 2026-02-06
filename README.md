@@ -1,4 +1,4 @@
-PyperPaste
+# PyperPaste
 
 PyperPaste is a lightweight Windows utility that pastes clipboard contents by **simulating keystrokes** instead of using the standard paste operation.
 It’s useful in environments where normal paste (`Ctrl+V`) is blocked, unreliable, or rate-limited.
