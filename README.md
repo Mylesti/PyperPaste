@@ -5,7 +5,7 @@ It’s useful in environments where normal paste (`Ctrl+V`) is blocked, unreliab
 
 The application runs with a simple Tkinter GUI and uses a global keyboard shortcut to type out whatever is currently in your clipboard.
 
-# Features
+## Features
 
 * 📋 Reads text directly from the clipboard
 * ⌨️ Types clipboard contents using simulated keystrokes
@@ -15,7 +15,7 @@ The application runs with a simple Tkinter GUI and uses a global keyboard shortc
 * 🔄 Automatically installs missing dependencies
 * 🛡 Requests administrator privileges (required for global hotkeys)
 
-# How It Works
+## How It Works
 
 1. You copy text normally (`Ctrl+C`)
 2. Place your cursor where you want the text to appear
@@ -24,7 +24,7 @@ The application runs with a simple Tkinter GUI and uses a global keyboard shortc
 
 This bypasses applications that block or interfere with normal paste operations.
 
-# Requirements
+## Requirements
 
 * **Operating System:** Windows
 * **Python:** 3.8+
@@ -46,7 +46,7 @@ Standard library modules (no installation needed):
 * `sys`
 * `ctypes`
 
-# Installation
+## Installation
 
 Clone the repository:
 
@@ -67,7 +67,7 @@ If dependencies are missing, the script will install them automatically using `p
 
 ---
 
-# Usage
+## Usage
 
 1. Run the program
 2. Copy any text (`Ctrl+C`)
@@ -75,7 +75,7 @@ If dependencies are missing, the script will install them automatically using `p
 4. Press the displayed shortcut (`Ctrl+B` by default)
 5. The text will be typed automatically
 
-# Changing Settings
+## Changing Settings
 
 * Click **Change settings**
 * Modify:
@@ -89,7 +89,7 @@ If dependencies are missing, the script will install them automatically using `p
 
 ---
 
-# Notes & Limitations
+## Notes & Limitations
 
 * This tool **simulates keyboard input** — it is not instant like normal paste
 * Large clipboard contents may take time to type
@@ -99,7 +99,7 @@ If dependencies are missing, the script will install them automatically using `p
 
 ---
 
-# Security Considerations
+## Security Considerations
 
 * The application has access to clipboard contents
 * It simulates keystrokes globally
@@ -108,7 +108,7 @@ If dependencies are missing, the script will install them automatically using `p
 
 ---
 
-# Known Issues
+## Known Issues
 
 * Invalid shortcuts can break hotkey registration until restart
 * Extremely fast keystroke delays may cause dropped characters
@@ -116,7 +116,7 @@ If dependencies are missing, the script will install them automatically using `p
 
 ---
 
-# License
+## License
 
 MIT License
 
