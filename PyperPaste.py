@@ -15,6 +15,7 @@ ensure_package("keyboard")
 ensure_package("pyautogui")
 
 import tkinter as tk
+from tkinter import ttk
 import pyperclip
 import keyboard
 import time
@@ -30,7 +31,9 @@ class PyperPaste:
         self.root.geometry("500x600")
         self.root.resizable(False, False)
         self.shortcut = "ctrl+b"
-        self.interval = 0.10
+        self.interval = 0.
+        self.hisory_list = []
+        self.shortcuterrorvar = tk.StringVar()
 
         #Title 
 
@@ -56,6 +59,12 @@ class PyperPaste:
             width="15",
             command=self.howto
         )
+        self.history_button = tk.Button(
+            master=self.root,
+            text="History",
+            width="15",
+            command=self.history
+        )
         #End buttons
 
         #Shell
@@ -76,6 +85,7 @@ class PyperPaste:
 
         self.change_shortcut_button.pack()
         self.howtouse_button.pack(pady=5)
+        self.history_button.pack()
 
         self.shell_label.pack(pady=5)
         self.shell_window.pack()
@@ -100,6 +110,10 @@ class PyperPaste:
         self.shell_window.insert("end", "Sending...")
         time.sleep(0.2)
         contents = pyperclip.paste()
+        if contents not in self.hisory_list:
+            self.hisory_list.append(contents)
+            print(self.hisory_list)
+
         try:
             pyautogui.write(contents, interval=self.interval)
         except:
@@ -109,6 +123,7 @@ class PyperPaste:
         self.shell_window.config(state="disabled")
 
     def settings(self):
+        self.shortcuterrorvar.set("Avoid using common keybinds to avoid collisions")
         self.settings_window = tk.Toplevel(root)
         self.settings_window.title("Settings")
         self.settings_window.geometry("500x500")
@@ -126,6 +141,10 @@ class PyperPaste:
         self.keystroke_var = tk.Entry(
             master=self.settings_window,
         )
+        self.errorlabel = tk.Label(
+            master=self.settings_window,
+            textvariable=self.shortcuterrorvar
+        )
         self.exit_button = tk.Button(
             text="Apply",
             command=self.saver,
@@ -136,20 +155,36 @@ class PyperPaste:
         self.shortcut_var.pack(pady=10)
         self.keystroke_label.pack(pady=5)
         self.keystroke_var.pack()
-        self.exit_button.pack(pady=100)
+        self.errorlabel.pack(pady=20)
+        self.exit_button.pack(pady=60)
         self.shortcut_var.insert(0, self.shortcut)
         self.keystroke_var.insert(0, self.interval)
 
     def saver(self):
+        tempshortcutvar = self.shortcut
+        tempintervalvar = self.interval
         self.shortcut = self.shortcut_var.get()
-        self.interval = self.keystroke_var.get()
-        self.shortcut_display.config(state="normal")
-        self.shortcut_display.delete(0, tk.END)
-        self.shortcut_display.insert(0, f"Shortcut = {self.shortcut}")
-        self.shortcut_display.config(state="disabled")
-        self.settings_window.destroy()
-        keyboard.remove_all_hotkeys()
-        keyboard.add_hotkey(self.shortcut, self.printer)
+        try:
+            keyboard.remove_all_hotkeys()
+            keyboard.add_hotkey(self.shortcut, self.printer)
+        except ValueError:
+            self.shortcuterrorvar.set("Unvalid keybinds")
+            keyboard.add_hotkey(tempshortcutvar, self.printer)
+            return
+        
+        tempintervalvar = self.keystroke_var.get()
+        if any(c.isalpha() for c in tempintervalvar):
+            self.shortcuterrorvar.set("Invalid interval.")
+            exit
+        else:
+            self.interval = self.keystroke_var.get()
+            self.shortcut_display.config(state="normal")
+            self.shortcut_display.delete(0, tk.END)
+            self.shortcut_display.insert(0, f"Shortcut = {self.shortcut}")
+            self.shortcut_display.config(state="disabled")
+            self.settings_window.destroy()
+            keyboard.remove_all_hotkeys()
+            keyboard.add_hotkey(self.shortcut, self.printer)
 
     def howto(self):
         self.howto_window = tk.Toplevel(root)
@@ -163,6 +198,31 @@ class PyperPaste:
         )
         self.howto_label.pack()
         self.howto_window.mainloop()
+    
+    def history(self):
+        history_window = tk.Toplevel()
+        history_window.geometry("300x200")
+
+        historybox = tk.Text(
+            master=history_window
+        )
+        historybox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        historybox.config(state="disabled")
+    
+        scrollbar = ttk.Scrollbar(
+            master=history_window,
+            orient=tk.VERTICAL,
+            command=historybox.yview
+        )
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        historybox.config(yscrollcommand=scrollbar.set)
+        for item in self.hisory_list:
+            historybox.config(state="normal")
+            item = item + "\n\n-----------------------------\n\n"
+            historybox.insert(tk.END, item)
+            historybox.config(state="disabled")
+
+
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
