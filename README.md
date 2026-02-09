@@ -11,13 +11,20 @@ The application runs with a simple Tkinter GUI and uses a global keyboard shortc
 
 # Features
 
-📋 Reads text directly from the clipboard
-⌨️ Types clipboard contents using simulated keystrokes
+📋 Reads text directly from the 
+
+⌨️ Types clipboard contents using simulated 
+
 🔑 Configurable global hotkey with robust error handling to prevent invalid shortcuts
+
 ⏱ Adjustable typing speed (keystroke delay) with validation to prevent invalid values
+
 🖥 Simple Tkinter GUI
-🔄 Automatically installs missing dependencies
+
+🔄 Automatically installs missing 
+
 🛡 Requests administrator privileges (required for global hotkeys)
+
 📜 Clipboard history with a dedicated button and page to view past entries
 
 ## How It Works
