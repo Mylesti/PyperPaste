@@ -5,15 +5,20 @@ It’s useful in environments where normal paste (`Ctrl+V`) is blocked, unreliab
 
 The application runs with a simple Tkinter GUI and uses a global keyboard shortcut to type out whatever is currently in your clipboard.
 
-## Features
+## Planned changes
 
-* 📋 Reads text directly from the clipboard
-* ⌨️ Types clipboard contents using simulated keystrokes
-* 🔑 Configurable global hotkey
-* ⏱ Adjustable typing speed (keystroke delay)
-* 🖥 Simple Tkinter GUI
-* 🔄 Automatically installs missing dependencies
-* 🛡 Requests administrator privileges (required for global hotkeys)
+- Persistant hotkey settings
+
+# Features
+
+📋 Reads text directly from the clipboard
+⌨️ Types clipboard contents using simulated keystrokes
+🔑 Configurable global hotkey with robust error handling to prevent invalid shortcuts
+⏱ Adjustable typing speed (keystroke delay) with validation to prevent invalid values
+🖥 Simple Tkinter GUI
+🔄 Automatically installs missing dependencies
+🛡 Requests administrator privileges (required for global hotkeys)
+📜 Clipboard history with a dedicated button and page to view past entries
 
 ## How It Works
 
