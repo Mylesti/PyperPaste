@@ -21,7 +21,7 @@ The application runs with a simple Tkinter GUI and uses a global keyboard shortc
 
 🖥 Simple Tkinter GUI
 
-🔄 Automatically installs missing 
+🔄 Automatically installs missing dependencies
 
 🛡 Requests administrator privileges (required for global hotkeys)
 
